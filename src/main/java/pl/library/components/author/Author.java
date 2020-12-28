@@ -1,5 +1,7 @@
 package pl.library.components.author;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import pl.library.components.book.Book;
 
 import javax.persistence.*;
@@ -17,7 +19,8 @@ public class Author {
     private String authorName;
     private String authorSurname;
 
-    @ManyToMany(mappedBy = "authorList")
+    @ManyToMany(mappedBy = "authorList", fetch = FetchType.EAGER)
+    @Fetch(FetchMode.SELECT)
     private List<Book> bookList;
 
     public Long getAuthorId() {
