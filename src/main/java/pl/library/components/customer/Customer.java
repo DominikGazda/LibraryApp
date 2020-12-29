@@ -20,7 +20,7 @@ public class Customer {
     @OneToMany(mappedBy = "customer")
     private List<Loan> loanList;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "address_id")
     private Address address;
 
@@ -54,6 +54,14 @@ public class Customer {
 
     public void setLoanList(List<Loan> loanList) {
         this.loanList = loanList;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
     public void addLoan(Loan loan){
