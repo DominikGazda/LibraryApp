@@ -15,9 +15,11 @@ import java.util.stream.Collectors;
 public class AuthorService {
 
     private AuthorRepository authorRepository;
+    private BookMapper bookMapper;
 
-    public AuthorService(AuthorRepository authorRepository){
+    public AuthorService(AuthorRepository authorRepository, BookMapper bookMapper){
         this.authorRepository = authorRepository;
+        this.bookMapper = bookMapper;
     }
 
     public List<AuthorDto> getAuthors(){
@@ -55,7 +57,7 @@ public class AuthorService {
     public List<BookDto> getAllBooksForAuthorById(Long id){
         Author foundAuthor = authorRepository.findById(id).orElseThrow(AuthorNotFoundException::new);
         return foundAuthor.getBookList().stream()
-                .map(BookMapper::toDto)
+                .map(bookMapper::toDto)
                 .collect(Collectors.toList());
     }
 }

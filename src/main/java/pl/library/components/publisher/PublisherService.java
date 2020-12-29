@@ -2,7 +2,6 @@ package pl.library.components.publisher;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.server.ResponseStatusException;
 import pl.library.components.book.BookDto;
 import pl.library.components.book.BookMapper;
@@ -15,9 +14,11 @@ import java.util.stream.Collectors;
 public class PublisherService {
 
     private PublisherRepository publisherRepository;
+    private BookMapper bookMapper;
 
-    public PublisherService (PublisherRepository publisherRepository){
+    public PublisherService (PublisherRepository publisherRepository, BookMapper bookMapper){
         this.publisherRepository = publisherRepository;
+        this.bookMapper = bookMapper;
     }
 
     public List<PublisherDto> getAllPublishers(){
@@ -52,7 +53,7 @@ public class PublisherService {
         Publisher foundPublisher = publisherRepository.findById(id).orElseThrow(PublisherNotFoundException::new);
         return foundPublisher.getBookList()
                 .stream()
-                .map(BookMapper::toDto)
+                .map(bookMapper::toDto)
                 .collect(Collectors.toList());
     }
 
