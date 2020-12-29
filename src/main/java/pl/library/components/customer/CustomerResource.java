@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import pl.library.components.address.Address;
+import pl.library.components.loan.LoanDto;
 
 import java.net.URI;
 import java.util.List;
@@ -61,5 +62,10 @@ public class CustomerResource {
     @GetMapping("/{id}/address")
     public Address getAddressFromCustomerById(@PathVariable Long id){
         return customerService.getAddressFromCustomerById(id);
+    }
+
+    @GetMapping("/{id}/loans")
+    public List<LoanDto> getAllLoansFromCustomerById(@PathVariable Long id){
+        return customerService.getAllLoansFromCustomerById(id);
     }
 }

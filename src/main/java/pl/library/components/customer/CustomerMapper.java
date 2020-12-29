@@ -2,7 +2,7 @@ package pl.library.components.customer;
 
 public class CustomerMapper {
 
-    static CustomerDto toDto(Customer entity){
+    public static CustomerDto toDto(Customer entity){
         CustomerDto dto = new CustomerDto();
         dto.setCustomerId(entity.getCustomerId());
         dto.setCustomerName(entity.getCustomerName());
@@ -11,7 +11,7 @@ public class CustomerMapper {
         return dto;
     }
 
-    static Customer toEntity(CustomerDto dto){
+    public static Customer toEntity(CustomerDto dto){
         Customer entity = new Customer();
         entity.setCustomerId(dto.getCustomerId());
         entity.setCustomerName(dto.getCustomerName());

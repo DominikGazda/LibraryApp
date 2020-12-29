@@ -1,6 +1,11 @@
 package pl.library.components.loan;
 
+import pl.library.components.book.BookDto;
+import pl.library.components.customer.CustomerDto;
+import pl.library.components.librarian.LibrarianDto;
+
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class LoanDto {
 
@@ -8,11 +13,9 @@ public class LoanDto {
     private LocalDateTime startLoanDate;
     private LocalDateTime returnLoanDate;
     private boolean isActive;
-    private String bookName;
-    private String customerName;
-    private String customerSurname;
-    private String librarianName;
-    private String librarianSurname;
+    private List<BookDto> bookList;
+    private CustomerDto customer;
+    private Long librarianId;
 
     public Long getLoanId() {
         return loanId;
@@ -46,43 +49,27 @@ public class LoanDto {
         isActive = active;
     }
 
-    public String getBookName() {
-        return bookName;
+    public List<BookDto> getBookList() {
+        return bookList;
     }
 
-    public void setBookName(String bookName) {
-        this.bookName = bookName;
+    public void setBookList(List<BookDto> bookList) {
+        this.bookList = bookList;
     }
 
-    public String getCustomerName() {
-        return customerName;
+    public CustomerDto getCustomer() {
+        return customer;
     }
 
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
+    public void setCustomer(CustomerDto customer) {
+        this.customer = customer;
     }
 
-    public String getCustomerSurname() {
-        return customerSurname;
+    public Long getLibrarianId() {
+        return librarianId;
     }
 
-    public void setCustomerSurname(String customerSurname) {
-        this.customerSurname = customerSurname;
-    }
-
-    public String getLibrarianName() {
-        return librarianName;
-    }
-
-    public void setLibrarianName(String librarianName) {
-        this.librarianName = librarianName;
-    }
-
-    public String getLibrarianSurname() {
-        return librarianSurname;
-    }
-
-    public void setLibrarianSurname(String librarianSurname) {
-        this.librarianSurname = librarianSurname;
+    public void setLibrarianId(Long librarianId) {
+        this.librarianId = librarianId;
     }
 }

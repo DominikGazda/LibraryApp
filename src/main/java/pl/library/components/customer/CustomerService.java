@@ -5,6 +5,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 import pl.library.components.address.Address;
 import pl.library.components.customer.exceptions.CustomerNotFoundException;
+import pl.library.components.loan.Loan;
+import pl.library.components.loan.LoanDto;
+import pl.library.components.loan.LoanMapper;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -13,9 +16,11 @@ import java.util.stream.Collectors;
 public class CustomerService {
 
     private CustomerRepository customerRepository;
+    private LoanMapper loanMapper;
 
-    public CustomerService(CustomerRepository customerRepository){
+    public CustomerService(CustomerRepository customerRepository, LoanMapper loanMapper){
         this.customerRepository = customerRepository;
+        this.loanMapper = loanMapper;
     }
 
     public List<CustomerDto> getCustomers(){
@@ -49,6 +54,14 @@ public class CustomerService {
     public Address getAddressFromCustomerById(Long id){
         Customer customer = customerRepository.findById(id).orElseThrow(CustomerNotFoundException::new);
         return customer.getAddress();
+    }
+
+    public List<LoanDto> getAllLoansFromCustomerById(Long id){
+        Customer foundCustomer = customerRepository.findById(id).orElseThrow(CustomerNotFoundException::new);
+        return foundCustomer.getLoanList()
+                .stream()
+                .map(loanMapper::toDto)
+                .collect(Collectors.toList());
     }
 
     private CustomerDto mapAndSaveCustomer(CustomerDto dto){
