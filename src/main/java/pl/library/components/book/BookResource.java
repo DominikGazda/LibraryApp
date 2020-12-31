@@ -4,11 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import pl.library.components.author.AuthorDto;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
@@ -29,7 +31,9 @@ public class BookResource {
     }
 
     @PostMapping("")
-    public ResponseEntity<BookDto> saveBook(@RequestBody BookDto dto){
+    public ResponseEntity<BookDto> saveBook(@Valid @RequestBody BookDto dto, BindingResult result){
+        if(result.hasErrors())
+            bookService.checkErrors(result);
         BookDto savedBook = bookService.saveBook(dto);
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")
@@ -44,7 +48,9 @@ public class BookResource {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<BookDto> updateBook(@PathVariable Long id, @RequestBody BookDto dto){
+    public ResponseEntity<BookDto> updateBook(@PathVariable Long id,@Valid @RequestBody BookDto dto, BindingResult result){
+        if(result.hasErrors())
+            bookService.checkErrors(result);
         if (!id.equals(dto.getBookid()))
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Book must have id same as path variable");
         BookDto updatedBook = bookService.updateBook(dto);

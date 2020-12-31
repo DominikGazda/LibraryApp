@@ -4,6 +4,7 @@ import pl.library.components.address.Address;
 import pl.library.components.loan.Loan;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.List;
 import java.util.Objects;
 
@@ -14,7 +15,9 @@ public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long customerId;
+    @NotBlank(message = "{pl.library.components.customer.Customer.customerName.NotBlank}")
     private String customerName;
+    @NotBlank(message = "{pl.library.components.customer.Customer.customerSurname.NotBlank}")
     private String customerSurname;
 
     @OneToMany(mappedBy = "customer")

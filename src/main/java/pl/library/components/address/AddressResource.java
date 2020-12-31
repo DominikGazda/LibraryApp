@@ -4,10 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
@@ -29,7 +31,9 @@ public class AddressResource {
     }
 
     @PostMapping("")
-    public ResponseEntity<Address> saveAddress(@RequestBody Address address){
+    public ResponseEntity<Address> saveAddress(@Valid @RequestBody Address address, BindingResult result){
+        if(result.hasErrors())
+            addressService.checkErrors(result);
         Address savedAddress = addressService.saveAddress(address);
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")
@@ -44,7 +48,9 @@ public class AddressResource {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Address> updateAddress(@PathVariable Long id, @RequestBody Address address){
+    public ResponseEntity<Address> updateAddress(@PathVariable Long id,@Valid @RequestBody Address address, BindingResult result){
+        if(result.hasErrors())
+            addressService.checkErrors(result);
         if(!id.equals(address.getAddressId()))
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Address must have id same as path variable");
         Address updatedAddress = addressService.updateAddress(address);

@@ -1,9 +1,13 @@
 package pl.library.components.librarian;
 
+import javax.validation.constraints.NotEmpty;
+
 public class LibrarianDto {
 
     private Long librarianId;
+    @NotEmpty(message = "{pl.library.components.librarian.Librarian.librarianName.NotEmpty}")
     private String librarianName;
+    @NotEmpty(message = "{pl.library.components.librarian.Librarian.librarianSurname.NotEmpty}")
     private String librarianSurname;
 
     public Long getLibrarianId() {

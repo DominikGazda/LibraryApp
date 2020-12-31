@@ -4,11 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import pl.library.components.book.BookDto;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
@@ -29,7 +31,9 @@ public class PublisherResource {
     }
 
     @PostMapping("")
-    public ResponseEntity<PublisherDto> savePublisher(@RequestBody PublisherDto dto){
+    public ResponseEntity<PublisherDto> savePublisher(@Valid @RequestBody PublisherDto dto, BindingResult result){
+        if(result.hasErrors())
+            publisherService.checkErrors(result);
         PublisherDto savedPublisher = publisherService.savePublisher(dto);
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")
@@ -44,7 +48,9 @@ public class PublisherResource {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<PublisherDto> updatePublisher(@PathVariable Long id, @RequestBody PublisherDto dto){
+    public ResponseEntity<PublisherDto> updatePublisher(@PathVariable Long id, @Valid @RequestBody PublisherDto dto, BindingResult result){
+        if(result.hasErrors())
+            publisherService.checkErrors(result);
         if(!id.equals(dto.getPublisherId()))
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Publisher must have id same as path variable");
         PublisherDto updatedPublisher = publisherService.updatePublisher(dto);

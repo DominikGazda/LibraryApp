@@ -3,8 +3,9 @@ package pl.library.components.book;
 import pl.library.components.author.Author;
 import pl.library.components.loan.Loan;
 import pl.library.components.publisher.Publisher;
-
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 import java.util.List;
 import java.util.Objects;
 
@@ -16,7 +17,9 @@ public class Book {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "book_id")
     private Long bookId;
+    @NotBlank(message = "{pl.library.components.book.Book.bookName.NotBlank}")
     private String bookName;
+    @Pattern(regexp = "^[0-9]{13}?$", message = "{pl.library.components.book.Book.isbn.Pattern}")
     private String isbn;
     private Integer availableQuantity;
 
@@ -27,13 +30,13 @@ public class Book {
             )
     private List<Author> authorList;
 
+
     @ManyToOne
     @JoinColumn(name = "publisher_id")
     private Publisher publisher;
 
-    @ManyToOne
-    @JoinColumn(name="loan_id")
-    private Loan loan;
+    @OneToMany(mappedBy = "book")
+    private List <Loan> loansList;
 
     public Long getBookId() {
         return bookId;
@@ -83,12 +86,17 @@ public class Book {
         this.publisher = publisher;
     }
 
-    public Loan getLoan() {
-        return loan;
+    public List<Loan> getLoansList() {
+        return loansList;
     }
 
-    public void setLoan(Loan loan) {
-        this.loan = loan;
+    public void setLoansList(List<Loan> loansList) {
+        this.loansList = loansList;
+    }
+
+    public void addLoan(Loan loan){
+        loan.setBook(this);
+        this.loansList.add(loan);
     }
 
     @Override

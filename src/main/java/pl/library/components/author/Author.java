@@ -5,6 +5,7 @@ import org.hibernate.annotations.FetchMode;
 import pl.library.components.book.Book;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.util.List;
 import java.util.Objects;
 
@@ -16,7 +17,9 @@ public class Author {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "author_id")
     private Long authorId;
+    @NotEmpty(message = "{pl.library.components.author.Author.authorName.NotEmpty}")
     private String authorName;
+    @NotEmpty(message = "{pl.library.components.author.Author.authorSurname.NotEmpty}")
     private String authorSurname;
 
     @ManyToMany(mappedBy = "authorList", fetch = FetchType.EAGER)

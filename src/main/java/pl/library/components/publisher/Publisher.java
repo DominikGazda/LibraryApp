@@ -3,6 +3,7 @@ package pl.library.components.publisher;
 import pl.library.components.book.Book;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.util.List;
 import java.util.Objects;
 
@@ -13,6 +14,7 @@ public class Publisher {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long publisherId;
+    @NotEmpty(message = "{pl.library.components.publisher.Publisher.publisherName.NotEmpty}")
     private String publisherName;
 
     @OneToMany(mappedBy = "publisher")

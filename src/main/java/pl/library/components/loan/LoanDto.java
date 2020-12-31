@@ -1,20 +1,23 @@
 package pl.library.components.loan;
 
-import pl.library.components.book.BookDto;
 import pl.library.components.customer.CustomerDto;
-import pl.library.components.librarian.LibrarianDto;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Null;
 import java.time.LocalDateTime;
-import java.util.List;
 
 public class LoanDto {
 
     private Long loanId;
+    @Null(message = "{pl.library.components.loan.Loan.startLoanDate.NotEmpty}")
     private LocalDateTime startLoanDate;
     private LocalDateTime returnLoanDate;
     private boolean isActive;
-    private List<BookDto> bookList;
-    private CustomerDto customer;
+    @NotNull(message = "{pl.library.components.loan.Loan.book.NotNull}")
+    private Long bookId;
+    @NotNull(message = "{pl.library.components.loan.Loan.customer.NotNull}")
+    private Long customerId;
+    @NotNull(message = "{pl.library.components.loan.Loan.librarianId.NotNull}")
     private Long librarianId;
 
     public Long getLoanId() {
@@ -49,20 +52,20 @@ public class LoanDto {
         isActive = active;
     }
 
-    public List<BookDto> getBookList() {
-        return bookList;
+    public Long getBookId() {
+        return bookId;
     }
 
-    public void setBookList(List<BookDto> bookList) {
-        this.bookList = bookList;
+    public void setBookId(Long bookId) {
+        this.bookId = bookId;
     }
 
-    public CustomerDto getCustomer() {
-        return customer;
+    public Long getCustomerId() {
+        return customerId;
     }
 
-    public void setCustomer(CustomerDto customer) {
-        this.customer = customer;
+    public void setCustomerId(Long customerId) {
+        this.customerId = customerId;
     }
 
     public Long getLibrarianId() {

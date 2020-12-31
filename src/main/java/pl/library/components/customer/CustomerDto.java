@@ -2,10 +2,14 @@ package pl.library.components.customer;
 
 import pl.library.components.address.Address;
 
+import javax.validation.constraints.NotBlank;
+
 public class CustomerDto {
 
     private Long customerId;
+    @NotBlank(message = "{pl.library.components.customer.Customer.customerName.NotBlank}")
     private String customerName;
+    @NotBlank(message = "{pl.library.components.customer.Customer.customerSurname.NotBlank}")
     private String customerSurname;
     private Address address;
 

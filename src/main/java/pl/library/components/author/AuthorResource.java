@@ -3,11 +3,13 @@ package pl.library.components.author;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import pl.library.components.book.BookDto;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
@@ -27,7 +29,9 @@ public class AuthorResource {
     }
 
     @PostMapping("")
-    public ResponseEntity<AuthorDto> saveAuthor(@RequestBody AuthorDto dto){
+    public ResponseEntity<AuthorDto> saveAuthor(@Valid @RequestBody AuthorDto dto, BindingResult result){
+        if(result.hasErrors())
+            authorService.checkErrors(result);
         AuthorDto savedAuthor = authorService.saveAuthor(dto);
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")
@@ -42,7 +46,7 @@ public class AuthorResource {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<AuthorDto> updateAuthor(@PathVariable Long id,@RequestBody AuthorDto dto){
+    public ResponseEntity<AuthorDto> updateAuthor(@PathVariable Long id,@Valid @RequestBody AuthorDto dto){
         if(!dto.getAuthorId().equals(id))
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Author must have id same as path variable");
         AuthorDto updatedAuthor = authorService.updateAuthor(dto);

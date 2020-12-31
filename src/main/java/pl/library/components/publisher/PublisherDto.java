@@ -1,8 +1,11 @@
 package pl.library.components.publisher;
 
+import javax.validation.constraints.NotEmpty;
+
 public class PublisherDto {
 
     private Long publisherId;
+    @NotEmpty(message = "{pl.library.components.publisher.Publisher.publisherName.NotEmpty}")
     private String publisherName;
 
     public Long getPublisherId() {

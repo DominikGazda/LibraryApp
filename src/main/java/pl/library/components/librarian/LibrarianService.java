@@ -2,6 +2,8 @@ package pl.library.components.librarian;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.server.ResponseStatusException;
 import pl.library.components.librarian.exceptions.LibrarianNotFoundException;
 import pl.library.components.loan.Loan;
@@ -48,16 +50,14 @@ public class LibrarianService {
         return LibrarianMapper.toDto(librarianToDelete);
     }
 
-    public List<LoanDto> getAllLoansFromLibrarianById(Long id, String status) {
-        Librarian foundLibrarian = librarianRepository.findById(id).orElseThrow(LibrarianNotFoundException::new);
-        List<Loan> loanDtoList = new LinkedList<>();
-        if (status.equals("active")){
-            for(Loan loan:foundLibrarian.getLoanList()){
-                if(loan.isActive())
-                    loanDtoList.add(loan);
-            }
-        }
-        return null;
+    public void checkErrors(BindingResult result){
+        List<ObjectError> errors = result.getAllErrors();
+        String message = errors
+                .stream()
+                .map(ObjectError::getDefaultMessage)
+                .map(s -> s.toString() +" ")
+                .collect(Collectors.joining());
+        throw new ResponseStatusException(HttpStatus.BAD_REQUEST,message);
     }
 
     private LibrarianDto mapAndSaveLibrarian(LibrarianDto dto){

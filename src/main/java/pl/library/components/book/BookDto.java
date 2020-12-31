@@ -1,11 +1,17 @@
 package pl.library.components.book;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+
 public class BookDto {
 
     private Long bookid;
+    @NotBlank(message = "{pl.library.components.book.Book.bookName.NotBlank}")
     private String bookName;
+    @Pattern(regexp = "^[0-9]{13}?$", message = "{pl.library.components.book.Book.isbn.Pattern}")
     private String isbn;
     private Integer availableQuantity;
+    @NotBlank(message = "{pl.library.components.book.BookDto.publisher.NotBlank}")
     private String publisher;
 
     public Long getBookid() {

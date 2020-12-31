@@ -3,12 +3,14 @@ package pl.library.components.customer;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import pl.library.components.address.Address;
 import pl.library.components.loan.LoanDto;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
@@ -28,7 +30,9 @@ public class CustomerResource {
     }
 
     @PostMapping("")
-    public ResponseEntity<CustomerDto> saveCustomer(@RequestBody CustomerDto dto){
+    public ResponseEntity<CustomerDto> saveCustomer(@Valid @RequestBody CustomerDto dto, BindingResult result){
+        if(result.hasErrors())
+            customerService.checkErrors(result);
         CustomerDto savedCustomer = customerService.saveCustomer(dto);
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")
@@ -43,7 +47,9 @@ public class CustomerResource {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<CustomerDto> updateCustomer(@PathVariable Long id, @RequestBody CustomerDto dto){
+    public ResponseEntity<CustomerDto> updateCustomer(@PathVariable Long id, @Valid @RequestBody CustomerDto dto, BindingResult result){
+        if(result.hasErrors())
+            customerService.checkErrors(result);
         if(!id.equals(dto.getCustomerId()))
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Customer must have id same as path variable");
         CustomerDto updatedCustomer = customerService.updateCustomer(dto);

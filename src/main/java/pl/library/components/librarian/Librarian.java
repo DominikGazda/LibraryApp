@@ -3,6 +3,7 @@ package pl.library.components.librarian;
 import pl.library.components.loan.Loan;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.util.List;
 import java.util.Objects;
 
@@ -13,7 +14,9 @@ public class Librarian {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long librarianId;
+    @NotEmpty(message = "{pl.library.components.librarian.Librarian.librarianName.NotEmpty}")
     private String librarianName;
+    @NotEmpty(message = "{pl.library.components.librarian.Librarian.librarianSurname.NotEmpty}")
     private String librarianSurname;
 
     @OneToMany(mappedBy = "librarian")

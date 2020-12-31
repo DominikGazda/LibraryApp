@@ -3,11 +3,14 @@ package pl.library.components.librarian;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import pl.library.components.loan.LoanDto;
 
+import javax.naming.Binding;
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
@@ -27,7 +30,9 @@ public class LibrarianResource {
     }
 
     @PostMapping("")
-    public ResponseEntity<LibrarianDto> saveLibrarian(@RequestBody LibrarianDto dto){
+    public ResponseEntity<LibrarianDto> saveLibrarian(@Valid @RequestBody LibrarianDto dto, BindingResult result){
+        if(result.hasErrors())
+            librarianService.checkErrors(result);
         LibrarianDto savedLibrarian = librarianService.saveLibrarian(dto);
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")
@@ -42,7 +47,9 @@ public class LibrarianResource {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<LibrarianDto> updateLibrarian(@PathVariable Long id, @RequestBody LibrarianDto dto){
+    public ResponseEntity<LibrarianDto> updateLibrarian(@PathVariable Long id,@Valid @RequestBody LibrarianDto dto, BindingResult result){
+        if(result.hasErrors())
+            librarianService.checkErrors(result);
         if(!id.equals(dto.getLibrarianId()))
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Librarian must have id same as path variable");
         LibrarianDto updatedLibrarian = librarianService.updateLibrarian(dto);

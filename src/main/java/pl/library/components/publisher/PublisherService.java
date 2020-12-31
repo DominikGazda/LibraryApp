@@ -2,6 +2,8 @@ package pl.library.components.publisher;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.server.ResponseStatusException;
 import pl.library.components.book.BookDto;
 import pl.library.components.book.BookMapper;
@@ -55,6 +57,16 @@ public class PublisherService {
                 .stream()
                 .map(bookMapper::toDto)
                 .collect(Collectors.toList());
+    }
+
+    public void checkErrors(BindingResult result){
+        List<ObjectError> errors = result.getAllErrors();
+        String message = errors
+                .stream()
+                .map(ObjectError::getDefaultMessage)
+                .map(s -> s.toString() +" ")
+                .collect(Collectors.joining());
+        throw new ResponseStatusException(HttpStatus.BAD_REQUEST,message);
     }
 
     private PublisherDto mapAndSavePublisher(PublisherDto dto){

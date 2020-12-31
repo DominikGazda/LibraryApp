@@ -1,6 +1,9 @@
 package pl.library.components.address;
 
 import javax.persistence.*;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 import java.util.Objects;
 
 @Entity
@@ -10,7 +13,9 @@ public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long addressId;
+    @NotEmpty(message = "{pl.library.components.address.Address.city.NotEmpty}")
     private String city;
+    @Pattern(regexp = "^[0-9]{2}(?:-[0-9]{3})?$", message = "{pl.library.components.address.Address.postalCode.Pattern}")
     private String postalCode;
 
     public Long getAddressId() {

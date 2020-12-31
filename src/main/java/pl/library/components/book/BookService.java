@@ -2,6 +2,8 @@ package pl.library.components.book;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.server.ResponseStatusException;
 import pl.library.components.author.*;
@@ -78,5 +80,15 @@ public class BookService {
         Book bookToSave = bookMapper.toEntity(dto);
         Book savedBook = bookRepository.save(bookToSave);
         return bookMapper.toDto(savedBook);
+    }
+
+    public void checkErrors(BindingResult result){
+        List<ObjectError> errors = result.getAllErrors();
+        String message = errors
+                .stream()
+                .map(ObjectError::getDefaultMessage)
+                .map(s -> s.toString() +" ")
+                .collect(Collectors.joining());
+        throw new ResponseStatusException(HttpStatus.BAD_REQUEST,message);
     }
 }
