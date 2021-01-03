@@ -55,8 +55,7 @@ public class AddressResource {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Address must have id same as path variable");
         Address updatedAddress = addressService.updateAddress(address);
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()
-                .path("/{id}")
-                .buildAndExpand(updatedAddress.getAddressId())
+                .build()
                 .toUri();
         return ResponseEntity.created(location).body(updatedAddress);
     }
