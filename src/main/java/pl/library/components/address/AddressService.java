@@ -43,11 +43,13 @@ public class AddressService {
 
     public Address deleteAddress(Long id){
         Address foundAddress = addressRepository.findById(id).orElseThrow(AddressNotFoundException::new);
+
         addressRepository.delete(foundAddress);
         return foundAddress;
     }
 
     public void checkErrors(BindingResult result){
+        System.out.println(result);
         List<ObjectError> errors = result.getAllErrors();
         String message = errors
                 .stream()

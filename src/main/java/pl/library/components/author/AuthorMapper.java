@@ -4,7 +4,10 @@ public class AuthorMapper {
 
     public static AuthorDto toDto(Author entity){
         AuthorDto dto = new AuthorDto();
-        dto.setAuthorId(entity.getAuthorId());
+        if(entity.getAuthorId() == null)
+            dto.setAuthorId(null);
+        else
+            dto.setAuthorId(entity.getAuthorId());
         dto.setAuthorName(entity.getAuthorName());
         dto.setAuthorSurname(entity.getAuthorSurname());
         return dto;

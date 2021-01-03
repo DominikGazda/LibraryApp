@@ -46,13 +46,14 @@ public class AuthorResource {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<AuthorDto> updateAuthor(@PathVariable Long id,@Valid @RequestBody AuthorDto dto){
+    public ResponseEntity<AuthorDto> updateAuthor(@PathVariable Long id,@Valid @RequestBody AuthorDto dto, BindingResult result){
+        if(result.hasErrors())
+            authorService.checkErrors(result);
         if(!dto.getAuthorId().equals(id))
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Author must have id same as path variable");
         AuthorDto updatedAuthor = authorService.updateAuthor(dto);
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()
-                .path("/{id}")
-                .buildAndExpand(updatedAuthor.getAuthorId())
+                .build()
                 .toUri();
         return ResponseEntity.created(location).body(updatedAuthor);
     }

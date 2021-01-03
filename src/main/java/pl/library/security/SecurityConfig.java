@@ -10,9 +10,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                    .antMatchers("/elo").permitAll()
-                    .anyRequest().authenticated()
+                    .anyRequest().permitAll()
                 .and()
-                .formLogin();
+                .csrf().disable();
+
+             //   .and()
+              //  .formLogin()
+              //  .and()
+             //   .
+
     }
 }
