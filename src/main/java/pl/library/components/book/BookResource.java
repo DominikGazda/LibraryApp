@@ -55,8 +55,7 @@ public class BookResource {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Book must have id same as path variable");
         BookDto updatedBook = bookService.updateBook(dto);
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()
-                .path("/{id}")
-                .buildAndExpand(updatedBook.getBookid())
+                .build()
                 .toUri();
         return ResponseEntity.created(location).body(updatedBook);
     }

@@ -10,12 +10,17 @@ public class BookMapper {
 
     private PublisherRepository publisherRepository;
 
+
     public BookMapper(PublisherRepository publisherRepository){
         this.publisherRepository = publisherRepository;
     }
 
     public  BookDto toDto (Book book){
         BookDto dto = new BookDto();
+        if(book.getBookId() == null)
+            dto.setBookid(null);
+        else
+            dto.setBookid(book.getBookId());
         dto.setBookid(book.getBookId());
         dto.setBookName(book.getBookName());
         dto.setIsbn(book.getIsbn());

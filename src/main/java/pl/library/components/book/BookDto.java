@@ -2,6 +2,7 @@ package pl.library.components.book;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
+import java.util.Objects;
 
 public class BookDto {
 
@@ -52,5 +53,22 @@ public class BookDto {
 
     public void setPublisher(String publisher) {
         this.publisher = publisher;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        BookDto bookDto = (BookDto) o;
+        return Objects.equals(bookid, bookDto.bookid) &&
+                Objects.equals(bookName, bookDto.bookName) &&
+                Objects.equals(isbn, bookDto.isbn) &&
+                Objects.equals(availableQuantity, bookDto.availableQuantity) &&
+                Objects.equals(publisher, bookDto.publisher);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(bookid, bookName, isbn, availableQuantity, publisher);
     }
 }
