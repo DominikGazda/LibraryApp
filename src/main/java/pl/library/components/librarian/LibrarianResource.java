@@ -54,8 +54,7 @@ public class LibrarianResource {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Librarian must have id same as path variable");
         LibrarianDto updatedLibrarian = librarianService.updateLibrarian(dto);
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()
-                .path("/{id}")
-                .buildAndExpand(updatedLibrarian.getLibrarianId())
+                .build()
                 .toUri();
         return ResponseEntity.created(location).body(updatedLibrarian);
     }

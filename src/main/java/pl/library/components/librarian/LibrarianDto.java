@@ -1,6 +1,7 @@
 package pl.library.components.librarian;
 
 import javax.validation.constraints.NotEmpty;
+import java.util.Objects;
 
 public class LibrarianDto {
 
@@ -32,5 +33,20 @@ public class LibrarianDto {
 
     public void setLibrarianSurname(String librarianSurname) {
         this.librarianSurname = librarianSurname;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LibrarianDto that = (LibrarianDto) o;
+        return Objects.equals(librarianId, that.librarianId) &&
+                Objects.equals(librarianName, that.librarianName) &&
+                Objects.equals(librarianSurname, that.librarianSurname);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(librarianId, librarianName, librarianSurname);
     }
 }
