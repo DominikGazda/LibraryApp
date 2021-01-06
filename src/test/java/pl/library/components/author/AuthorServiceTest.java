@@ -44,7 +44,7 @@ class AuthorServiceTest {
 
     @DisplayName("GetAuthorTest")
     @Test
-    void getAuthorsTest() {
+    void getAuthors_ShouldReturnAuthorsList() {
         //given
         Author a1 = createAuthor(1L,"Marek","Kowalski");
         Author a2 = createAuthor(2L,"Krystian","Kozak");
@@ -65,7 +65,7 @@ class AuthorServiceTest {
     @Nested
     class SaveAuthorTest {
         @Test
-        void saveAuthorTest() {
+        void saveAuthor_ShouldReturnSavedAuthor() {
             //given
             Author author = createAuthor(null, "Marek", "Kowalski");
             AuthorDto authorDto = mapAuthorToDto(author);
@@ -100,7 +100,7 @@ class AuthorServiceTest {
     @Nested
     class GetAuthorByIdTest {
         @Test
-        void getAuthorByIdTest() {
+        void getAuthorById_ShouldReturnAuthorWithProvidedId() {
             //given
             Author author = createAuthor(1L, "Marek", "Kowalski");
             AuthorDto authorDto = mapAuthorToDto(author);
@@ -124,7 +124,7 @@ class AuthorServiceTest {
 
     @DisplayName("UpdateAuthorTest")
     @Test
-    void updateAuthorTest(){
+    void updateAuthor_ShouldReturnUpdatedAuthor(){
         //given
         Author author = createAuthor(1L, "Marek", "Kowalski");
         AuthorDto authorDto = mapAuthorToDto(author);
@@ -139,7 +139,7 @@ class AuthorServiceTest {
     @Nested
     class DeleteAuthorTest{
         @Test
-        void deleteAuthorTest(){
+        void deleteAuthor_ShouldReturnDeletedAuthor(){
          //given
          Author author = createAuthor(1L, "Marek", "Kowalski");
          AuthorDto authorDto = mapAuthorToDto(author);
@@ -170,7 +170,7 @@ class AuthorServiceTest {
     @Nested
     class GetAllBooksForAuthorByIdTest{
         @Test
-        void getAllBooksForAuthorByIdTest(){
+        void getAllBooksForAuthorById_ShouldReturnBooksListAssignedToAuthorWithProvidedId(){
             //given
             Author author = createAuthor(1L,"Adam","Wolak");
             Book firstBook = createBook(1L,"bookName",10,"1234567891234");

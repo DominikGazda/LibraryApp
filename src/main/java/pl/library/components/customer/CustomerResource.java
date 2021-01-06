@@ -1,5 +1,6 @@
 package pl.library.components.customer;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +21,7 @@ public class CustomerResource {
 
     private CustomerService customerService;
 
+    @Autowired
     public CustomerResource(CustomerService customerService){
         this.customerService = customerService;
     }

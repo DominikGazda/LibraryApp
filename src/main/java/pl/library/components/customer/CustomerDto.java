@@ -3,6 +3,7 @@ package pl.library.components.customer;
 import pl.library.components.address.Address;
 
 import javax.validation.constraints.NotBlank;
+import java.util.Objects;
 
 public class CustomerDto {
 
@@ -43,5 +44,21 @@ public class CustomerDto {
 
     public void setAddress(Address address) {
         this.address = address;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CustomerDto that = (CustomerDto) o;
+        return Objects.equals(customerId, that.customerId) &&
+                Objects.equals(customerName, that.customerName) &&
+                Objects.equals(customerSurname, that.customerSurname) &&
+                Objects.equals(address, that.address);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(customerId, customerName, customerSurname, address);
     }
 }

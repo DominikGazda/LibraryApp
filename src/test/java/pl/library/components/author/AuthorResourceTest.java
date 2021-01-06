@@ -42,7 +42,7 @@ class AuthorResourceTest {
 
     @DisplayName("GetAuthorsTest")
     @Test
-    void getAuthorsTest() throws Exception {
+    void getAuthors_ShouldReturnAuthorsList() throws Exception {
         //given
         AuthorDto firstAuthor = createAuthor(1L,"Damian","Kozak");
         AuthorDto secondAuthor = createAuthor(2L,"Wojciech","Bogdan");
@@ -65,7 +65,7 @@ class AuthorResourceTest {
     @Nested
     class SaveAuthorTest{
             @Test
-            void saveAuthorTest() throws Exception {
+            void saveAuthor_ShouldReturnSavedAuthor() throws Exception {
                 //given
                 AuthorDto author = createAuthor(null,"Damian","Kozak");
                 AuthorDto savedAuthor = createAuthor(1L,"Damian","Kozak");
@@ -120,7 +120,7 @@ class AuthorResourceTest {
 
     @DisplayName("GetAuthorByIdTest")
     @Test
-    void getAuthorByIdTest() throws Exception {
+    void getAuthorById_ShouldReturnAuthorWithProvidedId() throws Exception {
         //given
         AuthorDto author = createAuthor(1L,"Bartosz","Kozak");
         String url = "http://localhost:8080/api/author/{id}";
@@ -138,7 +138,7 @@ class AuthorResourceTest {
     @Nested
     class UpdateAuthorTest{
         @Test
-        void updateAuthorTest() throws Exception {
+        void updateAuthor_ShouldReturnUpdatedAuthor() throws Exception {
             //given
             AuthorDto author = createAuthor(1L,"Bartosz","Kozak");
             String url = "http://localhost:8080/api/author/{id}";
@@ -205,7 +205,7 @@ class AuthorResourceTest {
 
     @DisplayName("DeleteAuthorTest")
     @Test
-    void deleteAuthorTest() throws Exception {
+    void deleteAuthor_ShouldReturnDeletedAuthor() throws Exception {
         //given
         AuthorDto authorToDelete = createAuthor(1L,"Bartosz","Kozak");
         String url = "/api/author/{id}";
@@ -222,7 +222,7 @@ class AuthorResourceTest {
 
     @DisplayName("GetAllBooksForAuthorByIdTest")
     @Test
-    void getAllBooksForAuthorByIdTest() throws Exception {
+    void getAllBooksForAuthorById_ShouldReturnAllBooksAssignedToAuthorWithProvidedId() throws Exception {
         //given
         BookDto firstBook = createBookDto(1L,"Lew","1234567890987",10,"WSIP");
         BookDto secondBook = createBookDto(2L,"Bajka","1234567890900",20,"Nowa Era");

@@ -53,7 +53,7 @@ class BookResourceTest {
 
     @DisplayName("GetBooksTest")
     @Test
-    void getBooksTest() throws Exception {
+    void getBooks_ShouldReturnBooksList() throws Exception {
         //given
         BookDto firstBook = createBookDto(1L,"Bajka","WSIP","9876543212345",10);
         BookDto secondBook = createBookDto(2L,"Wiedźmin","Nowa Era","9876543212300",20);
@@ -80,13 +80,13 @@ class BookResourceTest {
     @Nested
     class SaveBookTest{
         @Test
-        void saveBookTest() throws Exception {
+        void saveBook_ShouldReturnSavedBook() throws Exception {
             //given
             BookDto book = createBookDto(null,"Bajka","WSIP","9876543212345",10);
             BookDto savedBook = createBookDto(1L,"Bajka","WSIP","9876543212345",10);
             String url = "/api/book";
             //when
-            when(bookService.saveBook(any(BookDto.class))).thenReturn(savedBook);
+            when(bookService.saveBook(book)).thenReturn(savedBook);
             //then
             mockMvc.perform(post(url)
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
@@ -149,7 +149,7 @@ class BookResourceTest {
 
     @DisplayName("GetBookByIdTest")
     @Test
-    void getBookByIdTest(){
+    void getBookById_ShouldReturnBookWithProvidedId(){
         //given
         BookDto book = createBookDto(1L,"Bajka","WSIP","987654321234522",10);
         String url = "/api/book/{id}";
@@ -162,7 +162,7 @@ class BookResourceTest {
     @Nested
     class UpdateBookTest{
         @Test
-        void updateBookTest() throws Exception {
+        void updateBook_ShouldReturnUpdatedBook() throws Exception {
             //given
             BookDto book = createBookDto(1L,"Bajka","WSIP","987654321234522",10);
             BookDto updatedBook = createBookDto(1L,"Majka","WSIP","987654321234522",10);
@@ -243,9 +243,9 @@ class BookResourceTest {
         }
     }
 
-    @DisplayName("DeleteMappingTest")
+    @DisplayName("DeleteBookTest")
     @Test
-    void deleteMappingTest() throws Exception {
+    void deleteBook_ShouldReturnDeletedBook() throws Exception {
         //given
         BookDto book = createBookDto(1L,"Bajka","WSIP","987654321234522",10);
         String url ="/api/book/{id}";
@@ -263,7 +263,7 @@ class BookResourceTest {
 
     @DisplayName("GetAllAuthorFromBookByIdTest")
     @Test
-    void getAllAuthorFromBookByIdTest() throws Exception {
+    void getAllAuthorFromBookById_ShouldReturnAuthorListAssignedToBookWithProvidedId() throws Exception {
         //given
         AuthorDto firstAuthor = createAuthorDto(1L,"Marek","Kowal");
         AuthorDto secondAuthor = createAuthorDto(2L,"Dawid","Marek");
@@ -286,7 +286,7 @@ class BookResourceTest {
 
     @DisplayName("SaveAuthorForBookByIdTest")
     @Test
-    void saveAuthorForBookByIdTest() throws Exception {
+    void saveAuthorForBookById_ShouldReturnSavedAuthor() throws Exception {
         //given
         AuthorDto dto = createAuthorDto(1L,"Marek","Kowal");
         String url = "/api/book/{idBook}/authors/{idAuthor}";

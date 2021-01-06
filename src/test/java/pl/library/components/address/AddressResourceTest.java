@@ -52,7 +52,7 @@ class AddressResourceTest {
 
     @DisplayName("GelAllAddressesTest")
     @Test
-    void testGetAllAddresses() throws Exception {
+    void getAllAddresses_ShouldReturnAddressList() throws Exception {
         //given
         Address a1 = createAddress(1L, "Mielec", "39-300");
         Address a2 = createAddress(2L, "Krakow", "32-800");
@@ -73,14 +73,16 @@ class AddressResourceTest {
     @Nested
     class SaveAddressTest {
         @Test
-        void saveAddressTest() throws Exception {
+        void saveAddress_ShouldReturnSavedAddress() throws Exception {
             //given
-            Address address = createAddress(1L, "Mielec", "39-300");
+            Address address = createAddress(null, "Mielec", "39-300");
+            Address createdAddress = createAddress(1L, "Mielec", "39-300");
             String url = "http://localhost:8080/api/address";
             //when
-            when(addressService.saveAddress(any(Address.class))).thenReturn(address);
+            when(addressService.saveAddress(address)).thenReturn(createdAddress);
             //then
             mockMvc.perform(MockMvcRequestBuilders.post(url)
+                    .contentType(MediaType.APPLICATION_JSON_VALUE)
                     .content(new ObjectMapper().writeValueAsString(address))
                     .contentType(MediaType.APPLICATION_JSON_VALUE))
                     .andExpect(status().isCreated())
@@ -123,9 +125,9 @@ class AddressResourceTest {
         }
     }
 
-    @DisplayName("GettAddressByIdTest")
+    @DisplayName("GetAddressByIdTest")
     @Test
-    void getAddressByIdTest() throws Exception {
+    void getAddressById_ShouldReturnAddressWithProvidedId() throws Exception {
         //given
         Address address = createAddress(1L, "Mielec", "39-300");
         String url = "http://localhost:8080/api/address/10";
@@ -141,7 +143,7 @@ class AddressResourceTest {
     @Nested
     class UpdateAddressTest {
         @Test
-        void updateAddressTest() throws Exception {
+        void updateAddress_ShouldReturnUpdatedAddress() throws Exception {
             //given
             Address address = createAddress(1L, "Mielec", "39-300");
             String url = "http://localhost:8080/api/address/1";
@@ -209,7 +211,7 @@ class AddressResourceTest {
 
     @DisplayName("DeleteAddressTest")
     @Test
-    void deleteAddressTest() throws Exception {
+    void deleteAddress_ShouldReturnDeletedAddressWithProvidedId() throws Exception {
         //given
         Address address = createAddress(1L, "Mielec", "39-300");
         String url = "http://localhost:8080/api/address/{id}";

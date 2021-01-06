@@ -41,7 +41,7 @@ class BookServiceTest {
 
     @DisplayName("GetBooksTest")
     @Test
-    void getBooksTest() {
+    void getBooks_ShouldReturnBookList() {
         //given
         Book book = createBook(1L,"Lew",10,"1234567890987");
         Book book2 = createBook(2L,"Bajka",20,"1234567890900");
@@ -66,7 +66,7 @@ class BookServiceTest {
     @Nested
     class SaveBookTest {
             @Test
-            void saveBookTest() {
+            void saveBook_ShouldReturnSavedBook() {
                 //given
                 BookDto bookDto = createBookDto(null, "Bajka", "9876543212345", 10, "WSIP");
                 Book book = createBook(1L, "Bajka", 10, "9876543212345");
@@ -93,7 +93,7 @@ class BookServiceTest {
     @Nested
     class GetBookByIdTest{
         @Test
-        void getBookByIdTest(){
+        void getBookById_ShouldReturnBookWithProvidedId(){
             //given
             Book book = createBook(1L, "Bajka", 10, "9876543212345");
             BookDto bookDto = toDto(book);
@@ -117,7 +117,7 @@ class BookServiceTest {
 
     @DisplayName("UpdateBookTest")
     @Test
-    void updateBookTest(){
+    void updateBook_ShouldReturnUpdatedBook(){
         //given
         Book book = createBook(1L, "Bajka", 10, "9876543212345");
         BookDto bookDto = toDto(book);
@@ -132,7 +132,7 @@ class BookServiceTest {
     @Nested
     class DeleteBookTest{
         @Test
-        void deleteBookTest() {
+        void deleteBook_ShouldReturnDeletedBook() {
             //given
             Book book = createBook(1L, "Bajka", 10, "9876543212345");
             BookDto bookDto = toDto(book);
@@ -164,7 +164,7 @@ class BookServiceTest {
     @Nested
     class GetAllAuthorFromBookByIdTest{
         @Test
-        void getAllAuthorFromBookByIdTest(){
+        void getAllAuthorFromBookById_ShouldReturnAuthorListAssignedToBookWithProvidedId(){
             //given
             Book book = createBook(1L, "Bajka", 10, "9876543212345");
 
@@ -202,7 +202,7 @@ class BookServiceTest {
     @Nested
     class SaveAuthorForBookId{
         @Test
-        void saveAuthorForBookId(){
+        void saveAuthorForBook_ShouldReturnSavedAuthor(){
             //given
             Book book = createBook(1L, "Bajka", 10, "9876543212345");
             Author author = createAuthor(1L,"Marian","Kowalski");

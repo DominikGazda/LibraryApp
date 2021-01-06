@@ -27,7 +27,7 @@ class AddressServiceTest {
 
         @DisplayName("GetAllAddresses")
         @Test
-        public void getAllAddresses() {
+        public void getAllAddresses_ShouldReturnAddressList() {
             //given
             Address a1 = createAddress(1L, "Mielec", "39-300");
             Address a2 = createAddress(2L, "Krakow", "32-100");
@@ -41,7 +41,7 @@ class AddressServiceTest {
         @Nested
         class GetAddressById {
             @Test
-            void getAddressById() {
+            void getAddressById_ShouldReturnAddressWIthProvidedId() {
                 //given
                 Address a1 = createAddress(1L, "Mielec", "39-300");
                 Optional<Address> optionalAddress = java.util.Optional.of(a1);
@@ -65,9 +65,10 @@ class AddressServiceTest {
     @Nested
     class SaveAddress {
         @Test
-        public void saveAddress() {
+        public void saveAddress_ShouldReturnSavedAddress() {
             //given
             Address address = createAddress(null, "Mielec", "39-300");
+            Address savedAddress = createAddress(1L, "Mielec", "39-300");
             //when
             addressService.saveAddress(address);
             //then
@@ -103,7 +104,7 @@ class AddressServiceTest {
 
     @DisplayName("UpdateAddress")
     @Test
-    public void updateAddress(){
+    public void updateAddress_ShouldReturnUpdatedAddress(){
         //given
         Address address = createAddress(2L, "Mielec", "39-300");
         Address updatedAddress = createAddress(2L,"Warszawa","33-333");
@@ -117,7 +118,7 @@ class AddressServiceTest {
     class DeleteAddress {
 
         @Test
-        public void deleteAddress() {
+        public void deleteAddress_ShouldReturnDeletedAddress() {
             //given
             Address address = createAddress(1L, "Mielec", "39-300");
             Optional<Address> optionalAddress = Optional.of(address);
