@@ -40,8 +40,6 @@ public class LoanService {
         if(dto.getBookId() == null)
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Loan doesn't have assigned book");
         Loan loanToSave = loanMapper.toEntity(dto);
-       // Customer customerToSave = loanToSave.getCustomer();
-       // loanToSave.setCustomer(customerToSave);
         Loan savedLoan = loanRepository.save(loanToSave);
         changeBookAvailableQuantity(savedLoan);
         return loanMapper.toDto(savedLoan);
