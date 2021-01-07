@@ -55,8 +55,7 @@ public class PublisherResource {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Publisher must have id same as path variable");
         PublisherDto updatedPublisher = publisherService.updatePublisher(dto);
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()
-                .path("/{id}")
-                .buildAndExpand(updatedPublisher.getPublisherId())
+                .build()
                 .toUri();
         return ResponseEntity.created(location).body(updatedPublisher);
     }
