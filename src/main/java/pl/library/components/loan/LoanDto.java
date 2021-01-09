@@ -5,11 +5,12 @@ import pl.library.components.customer.CustomerDto;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 public class LoanDto {
 
     private Long loanId;
-    @Null(message = "{pl.library.components.loan.Loan.startLoanDate.NotEmpty}")
+    @Null(message = "{pl.library.components.loan.Loan.startLoanDate.Null}")
     private LocalDateTime startLoanDate;
     private LocalDateTime returnLoanDate;
     private boolean isActive;
@@ -74,5 +75,37 @@ public class LoanDto {
 
     public void setLibrarianId(Long librarianId) {
         this.librarianId = librarianId;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LoanDto loanDto = (LoanDto) o;
+        return isActive == loanDto.isActive &&
+                Objects.equals(loanId, loanDto.loanId) &&
+                Objects.equals(startLoanDate, loanDto.startLoanDate) &&
+                Objects.equals(returnLoanDate, loanDto.returnLoanDate) &&
+                Objects.equals(bookId, loanDto.bookId) &&
+                Objects.equals(customerId, loanDto.customerId) &&
+                Objects.equals(librarianId, loanDto.librarianId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(loanId, startLoanDate, returnLoanDate, isActive, bookId, customerId, librarianId);
+    }
+
+    @Override
+    public String toString() {
+        return "LoanDto{" +
+                "loanId=" + loanId +
+                ", startLoanDate=" + startLoanDate +
+                ", returnLoanDate=" + returnLoanDate +
+                ", isActive=" + isActive +
+                ", bookId=" + bookId +
+                ", customerId=" + customerId +
+                ", librarianId=" + librarianId +
+                '}';
     }
 }

@@ -31,6 +31,7 @@ public class LoanResource {
     public ResponseEntity<LoanDto> saveLoan(@Valid @RequestBody LoanDto loanDto, BindingResult result){
         if(result.hasErrors())
             loanService.checkErrors(result);
+        System.out.println(loanDto);
         LoanDto savedLoan = loanService.saveLoan(loanDto);
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")
@@ -52,9 +53,8 @@ public class LoanResource {
                throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Loan must have id same as path variable");
            LoanDto updatedLoan = loanService.updateLoan(dto);
            URI location = ServletUriComponentsBuilder.fromCurrentRequest()
-                   .path("/{id}")
-                   .buildAndExpand(updatedLoan.getLoanId())
-                   .toUri();
+                .build()
+                .toUri();
            return ResponseEntity.created(location).body(updatedLoan);
     }
 
