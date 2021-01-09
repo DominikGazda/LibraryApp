@@ -1,5 +1,7 @@
 package pl.library.components.librarian;
 
+import java.util.ArrayList;
+
 public class LibrarianMapper {
 
     public static LibrarianDto toDto(Librarian entity){
@@ -15,6 +17,7 @@ public class LibrarianMapper {
         librarian.setLibrarianId(dto.getLibrarianId());
         librarian.setLibrarianName(dto.getLibrarianName());
         librarian.setLibrarianSurname(dto.getLibrarianSurname());
+        librarian.setLoanList(new ArrayList<>());
         return librarian;
     }
 }

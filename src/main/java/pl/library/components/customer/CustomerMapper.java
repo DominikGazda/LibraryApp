@@ -1,5 +1,7 @@
 package pl.library.components.customer;
 
+import java.util.ArrayList;
+
 public class CustomerMapper {
 
     public static CustomerDto toDto(Customer entity){
@@ -17,6 +19,7 @@ public class CustomerMapper {
         entity.setCustomerName(dto.getCustomerName());
         entity.setCustomerSurname(dto.getCustomerSurname());
         entity.setAddress(dto.getAddress());
+        entity.setLoanList(new ArrayList<>()); // Test
         return entity;
     }
 }

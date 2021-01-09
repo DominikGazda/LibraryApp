@@ -222,7 +222,7 @@ class AuthorServiceTest {
         return book;
     }
 
-    public AuthorDto mapAuthorToDto(Author entity){
+    private AuthorDto mapAuthorToDto(Author entity){
         AuthorDto dto = new AuthorDto();
         if(entity.getAuthorId() == null)
             dto.setAuthorId(null);

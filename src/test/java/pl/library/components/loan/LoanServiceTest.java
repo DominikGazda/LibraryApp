@@ -252,14 +252,6 @@ class LoanServiceTest {
         return customer;
     }
 
-    private Address createAddress(Long id, String city, String postalCode) {
-        Address address = new Address();
-        address.setAddressId(id);
-        address.setCity(city);
-        address.setPostalCode(postalCode);
-        return address;
-    }
-
    private LoanDto mapLoanToDto(Loan entity) {
         LoanDto dto = new LoanDto();
 
