@@ -133,7 +133,7 @@ none
 
   * **Code:** 400 Bad Request (if address has id different from id in path variable)
     * Message: ```Address must have id same as path variable ```
-      * **Code:** 400 Bad Request  (if empty city field)
+  * **Code:** 400 Bad Request  (if empty city field)
     * Message: ```City field cannot be empty```
   * **Code:** 400 Bad Request (if postalCode field doesn't match to pattern)
     * Message: ```Postal Code must match the expression 00-000```
