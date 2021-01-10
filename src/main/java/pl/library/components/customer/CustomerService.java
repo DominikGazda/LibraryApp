@@ -35,6 +35,9 @@ public class CustomerService {
     public CustomerDto saveCustomer(CustomerDto dto){
         if(dto.getCustomerId() != null)
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Customer cannot have id");
+        if(dto.getAddress().getAddressId() != null){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Address cannot have id");
+        }
        return mapAndSaveCustomer(dto);
     }
 
