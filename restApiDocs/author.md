@@ -1,4 +1,4 @@
-# Client Rest Documentation
+# Author Rest Documentation
 
 ## Table of contents
 * [Get authors](#get-authors)
