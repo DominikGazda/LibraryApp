@@ -8,7 +8,7 @@
 * [Rest documentation](#rest-documentation)
 * [To Do](#to-do)
 ## General info
-By using this application we can borrow and return books in library. I am creating this project because i want to learn how to create REST API by using Spring Boot and Angular.
+Library RESTful API created by using Spring
 	
 ## Technologies
 Project is created with:
@@ -58,8 +58,3 @@ http://localhost:8080/h2-console
 *  [Publisher entity](/restApiDocs/publisher.md)
 
 
-## To do
-* Learn javascript basics
-* Add Angular to the project
-* Add Spring Security to the project
-* Create REST API (Spring Boot + Angular)
