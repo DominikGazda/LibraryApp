@@ -1,5 +1,5 @@
 # Library-app
-#### Library application 
+#### Library application covered by tests
 ## Table of contents
 * [General info](#general-info)
 * [Technologies](#technologies)
