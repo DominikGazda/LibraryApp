@@ -1,0 +1,49 @@
+<div class="main-content">
+    <div class="section-content section-content-p30">
+        <div class="container-fluid">
+               <table  class="table table-hover">
+                   <thead class="table-dark">
+                       <tr>
+                           <td>Author name</td>
+                           <td>Author surname</td>
+                           <td></td>
+                       </tr>
+                   </thead>
+                   <tbody>
+                    <tr *ngFor="let temporaryAuthor of authors">
+                        <td>{{temporaryAuthor.authorName}}</td>
+                        <td>{{temporaryAuthor.authorSurname}}</td>
+                        <td><button (click)="findBooksByAuthor(temporaryAuthor)" class="au-btn-submit">Author Books</button></td>
+                    </tr>
+                   </tbody>
+                 
+               </table>
+            </div>
+        
+
+            <div class="footer-pagination">
+                <div class="row">
+                    <div class="col-md-6"></div>
+                    <div class="col-md-3">
+                        <div class="items">
+                            <label>Item per page</label> <select>
+                                <option>10</option>
+                                <option>20</option>
+                                <option>30</option>
+                                <option>40</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="number">1 - 10 of 100</div>
+                    </div>
+                    <div class="col-md-1">
+                        <div class="arrows">
+                            <a href="#"><i class="fa fa-angle-left" aria-hidden="true"></i></a>
+                            <a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

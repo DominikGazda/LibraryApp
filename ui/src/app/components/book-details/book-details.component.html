@@ -1,0 +1,19 @@
+<div class="main-content">
+    <div class="section-content section-content-p30">
+        <div class="container-fluid">
+            <div class="row" >
+                <div class="col">
+                    <img src="{{ book.imageUrl }}">
+                </div> 
+                <div class="col"> 
+                    <h1>{{ book.bookName }}</h1>
+                    <h3>ISBN: {{ book.isbn }}</h3>
+                    <h3>Quantity: {{ book.availableQuantity }}</h3>
+                    <h3>Publisher: {{ book.publisher }}</h3>
+                </div>  
+                </div>
+            </div>
+            <a routerLink="/products">Back to book list</a>
+        </div>
+    </div>
+  

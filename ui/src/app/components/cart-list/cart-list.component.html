@@ -1,0 +1,27 @@
+<div class="main-content">
+    <div class="section-content section-content-p30">
+        <div class="container-fluid">
+            <table class="table table-hover">
+                <thead class="table-dark">
+                <tr>
+                    <td width="30%"></td>
+                    <td>Title</td>
+                    <td>Quantity</td>
+                    <td>Other</td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let tempItem of cartList">
+                    <td><img src="{{ tempItem.imageUrl }}" width="30%"></td>
+                    <td>{{tempItem.bookName}}</td>
+                    <td>{{ tempItem.cartQuantity }}</td>
+                    <td>
+                        <button (click)="increaseQuantity(tempItem)" class="btn btn-primary">+</button>
+                        <button (click)="decreaseQuantity(tempItem)" class="btn btn-primary">-</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>        
