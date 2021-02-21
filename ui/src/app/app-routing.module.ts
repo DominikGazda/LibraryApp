@@ -4,8 +4,10 @@ import { AuthorListComponent } from './components/author-list/author-list.compon
 import { BookDetailsComponent } from './components/book-details/book-details.component';
 import { BookListComponent } from './components/book-list/book-list.component';
 import { CartListComponent } from './components/cart-list/cart-list.component';
+import { CheckoutComponent } from './components/checkout/checkout.component';
 
 const routes: Routes = [
+  {path:'checkout', component:CheckoutComponent},
   {path:'author/:authorId/books', component:BookListComponent},
   {path:'cart-list', component:CartListComponent},
   {path:'search/:keyword', component:BookListComponent},
