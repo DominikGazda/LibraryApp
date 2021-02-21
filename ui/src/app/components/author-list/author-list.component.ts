@@ -13,10 +13,25 @@ export class AuthorListComponent implements OnInit {
 
   authors: Author[];
 
+  thePageNumber: number = 1;
+  thePageSize: number = 4;
+  theTotalElements: number = 0;
+
   constructor(private authorService: AuthorService, private route: Router) { }
 
   ngOnInit(): void {
-      this.getAuthors();
+      this.getPaginatedAuthors();
+  }
+
+  getPaginatedAuthors(){
+    this.authorService.getPaginatedAuthorList(this.thePageNumber-1, this.thePageSize).subscribe(
+      result =>{
+        this.authors = result.content;
+        this.thePageNumber = result.pageable.pageNumber+1;
+        this.thePageSize = result.pageable.pageSize;
+        this.theTotalElements = result.totalElements;
+      }
+      );
   }
 
   getAuthors(){
@@ -26,7 +41,6 @@ export class AuthorListComponent implements OnInit {
   }
 
   findBooksByAuthor(author: Author){
-    console.log(author.authorId);
     this.route.navigateByUrl(`/author/${author.authorId}/books`);
   }
 }

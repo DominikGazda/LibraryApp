@@ -12,11 +12,15 @@ import { CartService } from 'src/app/services/cart.service';
 })
 export class BookListComponent implements OnInit {
 
-  books: Book[];
+  books: Book[] = [];
   keyword: string;
   search: boolean;
   bookByAuthor: boolean;
   authorId: string;
+
+  thePageNumber: number = 1;
+  thePageSize: number = 4;
+  theTotalElements: number = 0;
 
   constructor(private bookService: BookService, private route:ActivatedRoute, private cartService: CartService) { }
 
@@ -45,8 +49,14 @@ export class BookListComponent implements OnInit {
   }
 
   getBookList(){
-     this.bookService.getBookList().subscribe(
-      result => this.books = result
+     this.bookService.getPaginatedBookList(this.thePageNumber-1, this.thePageSize).subscribe(
+      result =>{
+        this.books = result.content;
+        this.thePageNumber = result.pageable.pageNumber+1;
+        this.thePageSize = result.pageable.pageSize;
+        this.theTotalElements = result.totalElements;
+        console.log(this.thePageNumber);
+      }
       );
   }
 
@@ -58,9 +68,14 @@ export class BookListComponent implements OnInit {
   }
 
   getBooksByAuthor(){
-    this.bookService.getBooksByAuthor(this.authorId).subscribe(
-      result => this.books = result
-    );
+    this.bookService.getPaginatedBooksByAuthor(this.thePageNumber-1, this.thePageSize, this.authorId).subscribe(
+      result =>{
+        this.books = result.content;
+        this.thePageNumber = result.pageable.pageNumber+1;
+        this.thePageSize = result.pageable.pageSize;
+        this.theTotalElements = result.totalElements;
+      }
+      );
   }
   
   updateCart(book: Book){
