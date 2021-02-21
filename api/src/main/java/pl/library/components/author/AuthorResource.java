@@ -1,5 +1,6 @@
 package pl.library.components.author;
 
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -25,8 +26,9 @@ public class AuthorResource {
     }
 
     @GetMapping("")
-    public List<AuthorDto> getAuthors(){
-        return  authorService.getAuthors();
+    public Page<AuthorDto> getAuthors(@RequestParam(defaultValue = "0") Integer pageNumber,
+                                      @RequestParam(defaultValue = "8") Integer pageSize){
+        return  authorService.getAuthors(pageNumber, pageSize);
     }
 
     @PostMapping("")
@@ -65,7 +67,9 @@ public class AuthorResource {
     }
 
     @GetMapping("/{id}/books")
-    public List<BookDto> getAllBooksForAuthorById(@PathVariable Long id){
-        return authorService.getAllBooksForAuthorById(id);
+    public Page<BookDto> getAllBooksForAuthorById(@PathVariable Long id,
+                                                  @RequestParam(defaultValue = "0") Integer pageNumber,
+                                                  @RequestParam(defaultValue = "8") Integer pageSize){
+        return authorService.getAllBooksForAuthorById(id, pageNumber, pageSize);
     }
 }
