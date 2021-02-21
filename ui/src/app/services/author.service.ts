@@ -12,7 +12,21 @@ export class AuthorService {
 
   constructor(private httpClient: HttpClient) { }
 
+  getPaginatedAuthorList(pageNumber: number, pageSize: number):Observable<GetResponseAuthor>{
+    const bookUrl = `${this.baseUrl}/?pageNumber=${pageNumber}&pageSize=${pageSize}`;
+    return this.httpClient.get<GetResponseAuthor>(bookUrl);
+}
+
   getAuthors(): Observable<Author[]>{
     return this.httpClient.get<Author[]>(this.baseUrl);
   }
 }
+
+interface GetResponseAuthor{
+  content: Author[];
+   pageable:{
+    pageSize: number;
+    pageNumber: number;
+  }
+  totalElements: number;
+  }
