@@ -1,6 +1,7 @@
 package pl.library.components.book;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -27,8 +28,9 @@ public class BookResource {
     }
 
     @GetMapping("")
-    public List<BookDto> getBooks(){
-        return bookService.getBooks();
+    public Page<BookDto> getBooks(@RequestParam(defaultValue = "0") Integer pageNumber,
+                                  @RequestParam(defaultValue = "8") Integer pageSize){
+        return bookService.getBooks(pageNumber, pageSize);
     }
 
     @PostMapping("")

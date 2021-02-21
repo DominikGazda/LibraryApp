@@ -1,5 +1,8 @@
 package pl.library.components.book;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
@@ -25,11 +28,11 @@ public class BookService {
         this.authorRepository = authorRepository;
     }
 
-    public List<BookDto> getBooks(){
-        return bookRepository.findAll()
-                .stream()
-                .map(bookMapper::toDto)
-                .collect(Collectors.toList());
+    public Page<BookDto> getBooks(Integer pageNo, Integer pageSize){
+        Pageable paging = PageRequest.of(pageNo, pageSize);
+        Page<Book> pageResult = bookRepository.findAll(paging);
+        Page<BookDto> pageDtoResult = pageResult.map(bookMapper::toDto);
+        return pageDtoResult;
     }
 
     public BookDto saveBook(BookDto dto){
