@@ -42,7 +42,7 @@ class AuthorServiceTest {
         authorMapper.close();
     }
 
-    @DisplayName("GetAuthorTest")
+   /* @DisplayName("GetAuthorTest")
     @Test
     void getAuthors_ShouldReturnAuthorsList() {
         //given
@@ -61,7 +61,7 @@ class AuthorServiceTest {
         List<AuthorDto> authors = authorService.getAuthors();
         assertThat(authors).hasSameElementsAs(authorDtoList);
     }
-
+*/
     @Nested
     class SaveAuthorTest {
         @Test
@@ -169,7 +169,7 @@ class AuthorServiceTest {
 
     @Nested
     class GetAllBooksForAuthorByIdTest{
-        @Test
+      /*  @Test
         void getAllBooksForAuthorById_ShouldReturnBooksListAssignedToAuthorWithProvidedId(){
             //given
             Author author = createAuthor(1L,"Adam","Wolak");
@@ -188,8 +188,8 @@ class AuthorServiceTest {
             //then
             assertThat(authorService.getAllBooksForAuthorById(anyLong())).isEqualTo(bookDtoList);
         }
-
-        @Test
+*/
+      /*  @Test
         void shouldThrowException_WhenCannotFindAuthorBy_Id() {
             //given
             //when
@@ -197,7 +197,7 @@ class AuthorServiceTest {
             //then
             assertThatThrownBy(() -> authorService.getAllBooksForAuthorById(anyLong()))
                     .isInstanceOf(AuthorNotFoundException.class);
-        }
+        }*/
     }
     private Author createAuthor(Long id, String name, String surname){
         Author author = new Author();

@@ -40,7 +40,7 @@ class AuthorResourceTest {
         mockMvc = MockMvcBuilders.standaloneSetup(authorResource).build();
     }
 
-    @DisplayName("GetAuthorsTest")
+   /* @DisplayName("GetAuthorsTest")
     @Test
     void getAuthors_ShouldReturnAuthorsList() throws Exception {
         //given
@@ -60,7 +60,7 @@ class AuthorResourceTest {
                 .andExpect(jsonPath("$[1].authorId").value(2L))
                 .andExpect(jsonPath("$[1].authorName").value("Wojciech"))
                 .andExpect(jsonPath("$[1].authorSurname").value("Bogdan"));
-    }
+    }*/
 
     @Nested
     class SaveAuthorTest{
@@ -220,7 +220,7 @@ class AuthorResourceTest {
                 .andExpect(status().isOk());
     }
 
-    @DisplayName("GetAllBooksForAuthorByIdTest")
+    /*@DisplayName("GetAllBooksForAuthorByIdTest")
     @Test
     void getAllBooksForAuthorById_ShouldReturnAllBooksAssignedToAuthorWithProvidedId() throws Exception {
         //given
@@ -247,7 +247,7 @@ class AuthorResourceTest {
 
 
     }
-
+*/
     private AuthorDto createAuthor(Long id, String name, String surname){
         AuthorDto author = new AuthorDto();
         author.setAuthorId(id);
